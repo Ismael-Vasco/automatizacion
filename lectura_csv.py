@@ -55,6 +55,10 @@ def definir_columnas(diccionario: dict):
 
     return diccionario
 
+# def convertir_a_csv(diccionario: dict):
+#     # Crear una nueva carpeta
+
+    
 def main():
     # leer todos los documentos de la carpeta y almacenarlos en un diccionario
     #print('presiona la tecla 1 para limpiar carga rlos datos')
@@ -69,7 +73,18 @@ def main():
     documenos_xlsx = definir_columnas(documenos_xlsx)
     print('listo la liempieza')
 
-    # convertir todos los documentos en .csv
+# convertir todos los documentos en .csv
+   
+    carpeta_salida = 'archivos_csv'
+    os.makedirs(carpeta_salida, exist_ok=True)  # Crea la carpeta si no existe
+
+    # Convertir y guardar los DataFrames en la nueva carpeta
+    lista_dicct = [documentos_csv,documenos_xlsx]
+
+    for i in lista_dicct:
+        for nombre_tabla, df in i.items():
+            df.to_csv(os.path.join(carpeta_salida, f'{nombre_tabla}.csv'), index=False)
+    
 
     # subir los archivos a Power BI
 
